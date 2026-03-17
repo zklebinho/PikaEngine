@@ -4,42 +4,25 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-// Defined in Window.cpp
-GLFWwindow* createWindow(int width, int height, const char* title);
+#include "window/Window.h"
 
 namespace pika::renderer {
+
+namespace win = pika::window;
 
 Renderer::Renderer(int width, int height, const std::string& title)
     : width_(width), height_(height), title_(title) {}
 
 Renderer::~Renderer() {
-    if (window_) {
-        glfwDestroyWindow(window_);
-        glfwTerminate();
-    }
 }
 
 bool Renderer::init() {
-    if (!glfwInit()) {
-        std::cerr << "[Renderer] Failed to initialize GLFW\n";
+    window_ = std::make_unique<win::Window>(width_, height_, title_);
+    if (!window_->init()) {
         return false;
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-    window_ = createWindow(width_, height_, title_.c_str());
-    if (!window_) {
-        std::cerr << "[Renderer] Failed to create window\n";
-        glfwTerminate();
-        return false;
-    }
-
-    glfwMakeContextCurrent(window_);
+    window_->makeContextCurrent();
     glfwSwapInterval(1);  // vsync on
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -58,16 +41,32 @@ void Renderer::renderFrame() {
 }
 
 void Renderer::mainLoop() {
+    loopFrames(-1);
+}
+
+void Renderer::loopFrames(int frames) {
     if (!window_) {
         std::cerr << "[Renderer] mainLoop called before init\n";
         return;
     }
 
-    while (!glfwWindowShouldClose(window_)) {
+    int count = 0;
+    while (!window_->shouldClose() && (frames < 0 || count < frames)) {
         renderFrame();
-        glfwSwapBuffers(window_);
-        glfwPollEvents();
+        swap();
+        poll();
+        ++count;
     }
+}
+
+bool Renderer::shouldClose() const { return window_ ? window_->shouldClose() : true; }
+
+void Renderer::poll() {
+    if (window_) window_->poll();
+}
+
+void Renderer::swap() {
+    if (window_) window_->swap();
 }
 
 }  // namespace pika::renderer

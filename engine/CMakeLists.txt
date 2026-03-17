@@ -11,7 +11,7 @@ set(PIKA_ENGINE_SRC
 if(PIKA_ENABLE_RENDERER)
     list(APPEND PIKA_ENGINE_SRC
         renderer/Renderer.cpp
-        renderer/Window.cpp
+        window/Window.cpp
     )
 endif()
 

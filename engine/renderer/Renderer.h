@@ -2,10 +2,15 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 struct GLFWwindow;
 
 namespace pika::renderer {
+
+namespace win {
+class Window;
+}
 
 class Renderer {
 public:
@@ -14,12 +19,16 @@ public:
 
     bool init();
     void mainLoop();
+    void loopFrames(int frames);
+    bool shouldClose() const;
+    void poll();
+    void swap();
 
 private:
     int width_;
     int height_;
     std::string title_;
-    GLFWwindow* window_{nullptr};
+    std::unique_ptr<win::Window> window_;
 
     void renderFrame();
 };
