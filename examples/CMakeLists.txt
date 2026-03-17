@@ -1,3 +1,6 @@
 if(BUILD_EXAMPLES)
     add_subdirectory(minimal)
+    add_subdirectory(platformer2d)
+    add_subdirectory(fps)
+    add_subdirectory(empty)
 endif()
