@@ -5,6 +5,8 @@ add_library(pikaengine
     src/NodeGraph.cpp
     renderer/Renderer.cpp
     renderer/Window.cpp
+    scripting/ScriptSystem.cpp
+    scripting/PythonBridge.cpp
 )
 
 target_include_directories(pikaengine
@@ -16,6 +18,7 @@ target_include_directories(pikaengine
 target_compile_features(pikaengine PUBLIC cxx_std_20)
 
 target_compile_definitions(pikaengine PUBLIC $<$<BOOL:${PIKA_ENABLE_LUA}>:PIKA_ENABLE_LUA>)
+target_compile_definitions(pikaengine PUBLIC $<$<BOOL:${PIKA_ENABLE_PYTHON}>:PIKA_ENABLE_PYTHON>)
 
 if(PIKA_ENABLE_LUA AND TARGET pika_lua_stub)
     target_link_libraries(pikaengine PUBLIC pika_lua_stub)
@@ -31,6 +34,16 @@ if(TARGET imgui)
     target_link_libraries(pikaengine PUBLIC imgui)
 endif()
 target_compile_definitions(pikaengine PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLAD)
+
+if(PIKA_ENABLE_PYTHON)
+    find_package(Python3 COMPONENTS Development)
+    if(Python3_Development_FOUND)
+        target_include_directories(pikaengine PUBLIC ${Python3_INCLUDE_DIRS})
+        target_link_libraries(pikaengine PUBLIC ${Python3_LIBRARIES})
+    else()
+        message(WARNING "Python development headers not found; Python bridge will build but may fail to link.")
+    endif()
+endif()
 
 if(PIKA_STRICT_WARNINGS)
     if(MSVC)
