@@ -11,12 +11,12 @@ A tiny, modular C++20 game engine inspired by Godot, Unreal Engine, and Scratch.
 - Editor CLI placeholder ready for a future GUI
 
 ## Directory layout
-- `engine/` — core engine library (`pikaengine`): modules, scripting hook, node graph
-- `editor/` — CLI editor stub linking `pikaengine`
-- `plugins/` — sample plugin implementing `IModule`
-- `examples/` — runnable samples; `minimal/` shows engine + plugin + scripting stub
-- `docs/` — architecture, roadmap, contributing notes
-- `cmake/` — build options and third-party stubs
+- `engine/` ï¿½ core engine library (`pikaengine`): modules, scripting hook, node graph
+- `editor/` ï¿½ CLI editor stub linking `pikaengine`
+- `plugins/` ï¿½ sample plugin implementing `IModule`
+- `examples/` ï¿½ runnable samples; `minimal/` shows engine + plugin + scripting stub
+- `docs/` ï¿½ architecture, roadmap, contributing notes
+- `cmake/` ï¿½ build options and third-party stubs
 
 ## Build (CMake = 3.20)
 ```bash
@@ -49,3 +49,15 @@ Run example (path may vary per platform):
 
 ## Contributing
 See `docs/contributing.md`. PRs and issues welcome.
+
+## Pika Engine
+
+A lightweight modular game engine designed for speed, flexibility and community driven development.
+
+Features:
+
+- C++ core
+- plugin architecture
+- visual scripting
+- Python scripting
+- extremely lightweight runtime
