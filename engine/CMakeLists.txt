@@ -3,6 +3,8 @@ add_library(pikaengine
     src/Module.cpp
     src/Scripting.cpp
     src/NodeGraph.cpp
+    renderer/Renderer.cpp
+    renderer/Window.cpp
 )
 
 target_include_directories(pikaengine
