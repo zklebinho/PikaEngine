@@ -25,3 +25,24 @@ if(PIKA_STRICT_WARNINGS)
         target_compile_options(pikaengine PRIVATE -Wall -Wextra -Wpedantic -Werror)
     endif()
 endif()
+
+# Core demo executable
+add_executable(pika_core
+    core/main.cpp
+    core/Engine.cpp
+)
+
+target_include_directories(pika_core PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(pika_core PRIVATE pikaengine)
+target_compile_features(pika_core PRIVATE cxx_std_20)
+
+if(PIKA_STRICT_WARNINGS)
+    if(MSVC)
+        target_compile_options(pika_core PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(pika_core PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+endif()
