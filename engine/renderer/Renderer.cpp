@@ -1,5 +1,6 @@
 #include "Renderer.h"
 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -40,6 +41,11 @@ bool Renderer::init() {
 
     glfwMakeContextCurrent(window_);
     glfwSwapInterval(1);  // vsync on
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "[Renderer] Failed to load GL\n";
+        return false;
+    }
 
     return true;
 }

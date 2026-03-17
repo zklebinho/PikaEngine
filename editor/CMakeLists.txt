@@ -2,7 +2,7 @@ add_executable(pikaeditor
     src/main.cpp
 )
 
-target_link_libraries(pikaeditor PRIVATE pikaengine)
+target_link_libraries(pikaeditor PRIVATE pikaengine imgui glfw glad)
 target_compile_features(pikaeditor PRIVATE cxx_std_20)
 
 if(PIKA_STRICT_WARNINGS)

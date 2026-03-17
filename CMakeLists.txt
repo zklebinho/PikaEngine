@@ -4,6 +4,9 @@ project(PikaEngine LANGUAGES CXX)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(PikaOptions)
 
+include(FetchContent)
+include(FetchGUI)
+
 if(PIKA_ENABLE_LUA)
     include(FetchLua)
 endif()
