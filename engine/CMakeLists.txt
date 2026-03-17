@@ -7,6 +7,7 @@ add_library(pikaengine
     renderer/Window.cpp
     scripting/ScriptSystem.cpp
     scripting/PythonBridge.cpp
+    plugins/PluginManager.cpp
 )
 
 target_include_directories(pikaengine

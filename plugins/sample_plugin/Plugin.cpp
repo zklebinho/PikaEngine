@@ -31,4 +31,9 @@ PIKA_PLUGIN_EXPORT std::shared_ptr<modules::IModule> createSamplePlugin() {
     return std::make_shared<SamplePlugin>();
 }
 
+// Generic factory name so PluginManager can find it by default.
+PIKA_PLUGIN_EXPORT std::shared_ptr<modules::IModule> createPlugin() {
+    return createSamplePlugin();
+}
+
 }  // namespace pika::plugins
