@@ -1,0 +1,69 @@
+{
+  "version": 5,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20
+  },
+  "configurePresets": [
+    {
+      "name": "windows-msvc",
+      "hidden": false,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/windows",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "PIKA_ENABLE_LUA": "OFF",
+        "PIKA_ENABLE_PYTHON": "OFF"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "linux-gcc",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "PIKA_ENABLE_LUA": "OFF",
+        "PIKA_ENABLE_PYTHON": "OFF"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "wasm-emscripten",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/wasm",
+      "toolchainFile": "${sourceDir}/cmake/toolchains/emscripten.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "PIKA_ENABLE_RENDERER": "OFF",
+        "BUILD_EDITOR": "OFF",
+        "BUILD_EXAMPLES": "OFF",
+        "BUILD_PLUGINS": "OFF",
+        "PIKA_ENABLE_LUA": "OFF",
+        "PIKA_ENABLE_PYTHON": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows",
+      "configurePreset": "windows-msvc"
+    },
+    {
+      "name": "linux",
+      "configurePreset": "linux-gcc"
+    },
+    {
+      "name": "wasm",
+      "configurePreset": "wasm-emscripten"
+    }
+  ]
+}

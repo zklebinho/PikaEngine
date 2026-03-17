@@ -1,14 +1,21 @@
-add_library(pikaengine
+set(PIKA_ENGINE_SRC
     src/Engine.cpp
     src/Module.cpp
     src/Scripting.cpp
     src/NodeGraph.cpp
-    renderer/Renderer.cpp
-    renderer/Window.cpp
     scripting/ScriptSystem.cpp
     scripting/PythonBridge.cpp
     plugins/PluginManager.cpp
 )
+
+if(PIKA_ENABLE_RENDERER)
+    list(APPEND PIKA_ENGINE_SRC
+        renderer/Renderer.cpp
+        renderer/Window.cpp
+    )
+endif()
+
+add_library(pikaengine ${PIKA_ENGINE_SRC})
 
 target_include_directories(pikaengine
     PUBLIC
@@ -18,23 +25,28 @@ target_include_directories(pikaengine
 
 target_compile_features(pikaengine PUBLIC cxx_std_20)
 
-target_compile_definitions(pikaengine PUBLIC $<$<BOOL:${PIKA_ENABLE_LUA}>:PIKA_ENABLE_LUA>)
-target_compile_definitions(pikaengine PUBLIC $<$<BOOL:${PIKA_ENABLE_PYTHON}>:PIKA_ENABLE_PYTHON>)
+target_compile_definitions(pikaengine PUBLIC
+    $<$<BOOL:${PIKA_ENABLE_LUA}>:PIKA_ENABLE_LUA>
+    $<$<BOOL:${PIKA_ENABLE_PYTHON}>:PIKA_ENABLE_PYTHON>
+    $<$<BOOL:${PIKA_ENABLE_RENDERER}>:PIKA_ENABLE_RENDERER>
+)
 
 if(PIKA_ENABLE_LUA AND TARGET pika_lua_stub)
     target_link_libraries(pikaengine PUBLIC pika_lua_stub)
 endif()
 
-if(TARGET glfw)
-    target_link_libraries(pikaengine PUBLIC glfw)
+if(PIKA_ENABLE_RENDERER)
+    if(TARGET glfw)
+        target_link_libraries(pikaengine PUBLIC glfw)
+    endif()
+    if(TARGET glad)
+        target_link_libraries(pikaengine PUBLIC glad)
+    endif()
+    if(TARGET imgui)
+        target_link_libraries(pikaengine PUBLIC imgui)
+    endif()
+    target_compile_definitions(pikaengine PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLAD)
 endif()
-if(TARGET glad)
-    target_link_libraries(pikaengine PUBLIC glad)
-endif()
-if(TARGET imgui)
-    target_link_libraries(pikaengine PUBLIC imgui)
-endif()
-target_compile_definitions(pikaengine PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLAD)
 
 if(PIKA_ENABLE_PYTHON)
     find_package(Python3 COMPONENTS Development)

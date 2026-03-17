@@ -1,0 +1,19 @@
+# Minimal Emscripten toolchain
+set(CMAKE_SYSTEM_NAME Emscripten)
+set(CMAKE_SYSTEM_PROCESSOR wasm)
+
+set(EMSCRIPTEN_ROOT "$ENV{EMSCRIPTEN}" CACHE PATH "Path to emscripten")
+
+if(EMSCRIPTEN_ROOT)
+    set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT}/emcc")
+    set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT}/em++")
+else()
+    set(CMAKE_C_COMPILER "emcc")
+    set(CMAKE_CXX_COMPILER "em++")
+endif()
+
+set(CMAKE_AR "emar")
+set(CMAKE_RANLIB "emranlib")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sUSE_GLFW=3 -sUSE_WEBGL2")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sUSE_GLFW=3 -sUSE_WEBGL2")

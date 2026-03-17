@@ -5,7 +5,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(PikaOptions)
 
 include(FetchContent)
-include(FetchGUI)
+
+if(PIKA_ENABLE_RENDERER OR BUILD_EDITOR)
+    include(FetchGUI)
+endif()
 
 if(PIKA_ENABLE_LUA)
     include(FetchLua)
