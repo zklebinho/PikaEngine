@@ -1,5 +1,5 @@
 #include "EditorApp.h"
 
 int main() {
-    return pika::editor::RunEditor();
+    return kylie::editor::RunEditor();
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace pika::sandbox {
+namespace kylie::sandbox {
 
 bool SandboxScene::loadFromFile(const std::filesystem::path& path) {
     entities_.clear();
@@ -49,4 +49,4 @@ void SandboxScene::update(float deltaSeconds) {
     // Placeholder for future simulation logic
 }
 
-}  // namespace pika::sandbox
+}  // namespace kylie::sandbox

@@ -1,5 +1,5 @@
 #include "AIStub.h"
 
-namespace pika::ai {
+namespace kylie::ai {
 // Implementation remains in header for this lightweight stub.
 }

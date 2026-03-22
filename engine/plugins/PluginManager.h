@@ -1,4 +1,4 @@
-// PluginManager handles dynamic loading of plugin shared libraries
+// PluginManager handles dynamic loading of plugin shared libraries (VS Code style extensions)
 #pragma once
 
 #include "plugins/IPlugin.h"
@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 
-namespace pika::plugins {
+namespace kylie::plugins {
 
 class PluginManager {
 public:
@@ -24,4 +24,4 @@ private:
     std::vector<PluginHandle> plugins_;
 };
 
-}  // namespace pika::plugins
+}  // namespace kylie::plugins

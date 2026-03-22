@@ -1,11 +1,11 @@
-#include "pika/Scripting.hpp"
+#include "kylie/Scripting.hpp"
 
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-namespace pika::scripting {
+namespace kylie::scripting {
 
 bool ScriptingEngine::runScript(std::string_view code) { return run("memory", code); }
 
@@ -21,7 +21,7 @@ bool ScriptingEngine::runFile(const std::filesystem::path& path) {
 }
 
 bool ScriptingEngine::run(std::string_view label, std::string_view code) {
-#ifdef PIKA_ENABLE_LUA
+#ifdef KYLIE_ENABLE_LUA
     std::cout << "[Scripting] (Lua stub) Executing script: " << label << "\n";
     (void)code;
     // Real Lua integration will live here.
@@ -33,4 +33,4 @@ bool ScriptingEngine::run(std::string_view label, std::string_view code) {
 #endif
 }
 
-}  // namespace pika::scripting
+}  // namespace kylie::scripting

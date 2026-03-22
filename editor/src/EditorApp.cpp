@@ -2,40 +2,50 @@
 
 #include "core/EngineApp.h"
 #include "ui/EditorUI.h"
-#include "sandbox/SandboxScene.h"
+#include "visual_scripting/Graph.h"
 
 #include <filesystem>
 #include <iostream>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 int RunEditor() {
-    pika::core::EngineConfig config;
-    config.title = "Pika Engine Editor";
+    kylie::core::EngineConfig config;
+    config.title = "Kylie Engine Editor";
     config.enableDocking = true;
     config.enableViewports = true;
 
-    pika::core::EngineApp engine;
+    kylie::core::EngineApp engine;
     if (!engine.init(config)) {
         return 1;
     }
 
-    // Load sandbox scene for preview data
-    pika::sandbox::SandboxScene scene;
-    const std::filesystem::path scenePath{"assets/scenes/test.scene"};
-    scene.loadFromFile(scenePath);
-
     EditorUI ui{"assets"};
-    ui.pushLog("Pika Engine started successfully");
-    ui.pushLog("Loaded scene: " + scene.name());
+    ui.pushLog("Kylie Engine started successfully");
+    if (auto active = engine.scenes().activeScene()) {
+        ui.pushLog("Loaded scene: " + active->name());
+    }
+    // Build a tiny visual scripting sample graph
+    kylie::visual::VisualScriptGraph graph;
+    auto& eventNode = graph.addNode("OnStart", kylie::visual::NodeCategory::Event);
+    eventNode.addPin("Out", kylie::visual::PinKind::Output);
+    auto& logicNode = graph.addNode("Print", kylie::visual::NodeCategory::Logic);
+    logicNode.addPin("In", kylie::visual::PinKind::Input);
+    logicNode.setCode("print('Hello from visual script')");
+    graph.connect(eventNode.id(), 1, logicNode.id(), 1);
+    ui.pushLog("[VisualScript] " + graph.debugSummary());
 
     auto onUpdate = [&](float dt) {
         (void)dt;
-        scene.update(dt);
+        // Scene-specific simulation would go here.
     };
 
     auto onGui = [&](float dt) {
-        ui.draw(scene.name(), scene.entities(), dt);
+        auto active = engine.scenes().activeScene();
+        static std::vector<std::string> emptyEntities;
+        const auto& ents = active ? active->entities() : emptyEntities;
+        const std::string sceneName = active ? active->name() : "No Scene";
+        ui.draw(sceneName, ents, dt);
     };
 
     engine.run(onUpdate, onGui);
@@ -43,4 +53,4 @@ int RunEditor() {
     return 0;
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

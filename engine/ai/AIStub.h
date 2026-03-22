@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-namespace pika::ai {
+namespace kylie::ai {
 
 // Placeholder for future local AI integration
 class AIStub {
@@ -22,4 +22,4 @@ public:
     }
 };
 
-}  // namespace pika::ai
+}  // namespace kylie::ai

@@ -1,12 +1,14 @@
 #pragma once
 
-#include "pika/Module.hpp"
+#include "kylie/Module.hpp"
 #include "ecs/Registry.h"
 #include "renderer/Renderer.h"
 #include "scripting/ScriptSystem.h"
 #include "scripting/PythonBridge.h"
 #include "plugins/PluginManager.h"
 #include "ai/AIStub.h"
+#include "scene/SceneManager.h"
+#include "dimensions/Dimensions.h"
 
 #include <filesystem>
 #include <functional>
@@ -15,12 +17,12 @@
 
 struct ImGuiContext;
 
-namespace pika::core {
+namespace kylie::core {
 
 struct EngineConfig {
     int width{1280};
     int height{720};
-    std::string title{"Pika Engine Editor"};
+    std::string title{"Kylie Engine Editor"};
     bool enableDocking{true};
     bool enableViewports{true};
     bool enablePlugins{false};
@@ -41,6 +43,7 @@ public:
     ecs::Registry& ecs() { return ecs_; }
     scripting::ScriptSystem& scripting() { return scriptSystem_; }
     plugins::PluginManager& pluginManager() { return pluginManager_; }
+    scene::SceneManager& scenes() { return sceneManager_; }
 
     void setClearColor(float r, float g, float b) { renderer_.setClearColor(r, g, b, 1.0f); }
 
@@ -53,6 +56,8 @@ private:
     modules::ModuleRegistry registry_;
     ecs::Registry ecs_;
     ai::AIStub aiStub_;
+    scene::SceneManager sceneManager_;
+    dimensions::Dimension3D defaultDimension_;
 
     bool imguiInitialized_{false};
 
@@ -61,4 +66,4 @@ private:
     void loadPlugins();
 };
 
-}  // namespace pika::core
+}  // namespace kylie::core

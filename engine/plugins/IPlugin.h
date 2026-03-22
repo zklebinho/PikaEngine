@@ -1,11 +1,11 @@
 // Plugin interface for dynamically loaded modules
 #pragma once
 
-#include "pika/Module.hpp"
+#include "kylie/Module.hpp"
 
-namespace pika::plugins {
+namespace kylie::plugins {
 
 // Factory function signature that plugins should export.
 using CreatePluginFn = std::shared_ptr<modules::IModule> (*)();
 
-}  // namespace pika::plugins
+}  // namespace kylie::plugins

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-namespace pika::scripting {
+namespace kylie::scripting {
 
 void ScriptSystem::attachCppScript(ecs::Registry& registry,
                                    ecs::Entity entity,
@@ -45,4 +45,4 @@ void ScriptSystem::update(ecs::Registry& registry, float deltaSeconds) {
     });
 }
 
-}  // namespace pika::scripting
+}  // namespace kylie::scripting

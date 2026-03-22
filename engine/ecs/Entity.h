@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace pika::ecs {
+namespace kylie::ecs {
 
 struct Entity {
     using id_type = std::uint32_t;
@@ -18,4 +18,4 @@ struct Entity {
     static Entity null() { return {}; }
 };
 
-}  // namespace pika::ecs
+}  // namespace kylie::ecs

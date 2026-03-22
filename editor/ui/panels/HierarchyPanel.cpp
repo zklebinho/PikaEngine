@@ -1,7 +1,7 @@
 #include "HierarchyPanel.h"
 #include "imgui.h"
 
-namespace pika::editor {
+namespace kylie::editor {
 
 int HierarchyPanel::draw(const std::vector<std::string>& entities, int selectedIndex) {
     ImGui::Begin("Hierarchy");
@@ -15,4 +15,4 @@ int HierarchyPanel::draw(const std::vector<std::string>& entities, int selectedI
     return selectedIndex;
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

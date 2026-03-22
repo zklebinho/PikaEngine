@@ -5,7 +5,7 @@
 
 struct GLFWwindow;
 
-namespace pika::window {
+namespace kylie::window {
 
 class Window {
 public:
@@ -31,4 +31,4 @@ private:
     static int s_initCount;
 };
 
-}  // namespace pika::window
+}  // namespace kylie::window

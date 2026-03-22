@@ -1,10 +1,10 @@
-#include "pika/Engine.hpp"
+#include "kylie/Engine.hpp"
 
 #include <iostream>
 
 int main() {
-    std::cout << "PikaEngine Empty Starter\n";
-    pika::Engine engine;
+    std::cout << "KylieEngine Empty Starter\n";
+    kylie::Engine engine;
     engine.setTickCallback([](float dt) {
         std::cout << "[Empty] Tick dt=" << dt << "\n";
     });

@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-namespace pika::window {
+namespace kylie::window {
 
 int Window::s_initCount = 0;
 
@@ -63,4 +63,4 @@ bool Window::shouldClose() const {
     return handle_ ? glfwWindowShouldClose(handle_) : true;
 }
 
-}  // namespace pika::window
+}  // namespace kylie::window

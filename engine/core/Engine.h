@@ -1,13 +1,13 @@
-// Core application runner for PikaEngine
+// Core application runner for KylieEngine
 #pragma once
 
-#include "pika/Module.hpp"
+#include "kylie/Module.hpp"
 
 #include <functional>
 #include <memory>
 #include <queue>
 
-namespace pika::core {
+namespace kylie::core {
 
 struct Event {
     std::string type;
@@ -38,4 +38,4 @@ private:
     void dispatchEvents();   // placeholder to route queued events
 };
 
-}  // namespace pika::core
+}  // namespace kylie::core

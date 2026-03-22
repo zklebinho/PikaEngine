@@ -2,7 +2,7 @@
 
 #include "imgui.h"
 
-namespace pika::editor {
+namespace kylie::editor {
 
 EditorUI::EditorUI(std::filesystem::path assetsRoot)
     : assetsRoot_(std::move(assetsRoot)) {
@@ -10,6 +10,7 @@ EditorUI::EditorUI(std::filesystem::path assetsRoot)
     knownAssets_.push_back("models/");
     knownAssets_.push_back("textures/");
     knownAssets_.push_back("scripts/");
+    knownAssets_.push_back("audio/");
 }
 
 void EditorUI::pushLog(std::string line) {
@@ -60,10 +61,30 @@ void EditorUI::buildDockspace() {
     ImGui::Begin("DockSpace", nullptr, window_flags);
     ImGui::PopStyleVar(3);
 
-    ImGuiID dockspace_id = ImGui::GetID("PikaDockSpace");
+    ImGuiID dockspace_id = ImGui::GetID("kylieDockSpace");
     ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f));
 
     buildMenuBar();
+    ImGui::End();
+}
+
+void EditorUI::drawToolbar() {
+    ImGui::Begin("Toolbar");
+    static bool playing = false;
+    if (ImGui::Button(playing ? "Stop" : "Play")) {
+        playing = !playing;
+        logs_.push_back(playing ? "[Toolbar] Play pressed" : "[Toolbar] Stop pressed");
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Pause")) {
+        logs_.push_back("[Toolbar] Pause pressed");
+    }
+    ImGui::SameLine();
+    ImGui::TextDisabled("|");
+    ImGui::SameLine();
+    if (ImGui::Button("Build")) {
+        logs_.push_back("[Toolbar] Build requested");
+    }
     ImGui::End();
 }
 
@@ -71,6 +92,8 @@ void EditorUI::draw(const std::string& sceneName,
                     const std::vector<std::string>& entities,
                     float deltaSeconds) {
     buildDockspace();
+
+    drawToolbar();
 
     selectedEntity_ = hierarchyPanel_.draw(entities, selectedEntity_);
     std::string selectedName = (selectedEntity_ >= 0 && selectedEntity_ < static_cast<int>(entities.size()))
@@ -91,4 +114,4 @@ void EditorUI::draw(const std::string& sceneName,
     ImGui::End();
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

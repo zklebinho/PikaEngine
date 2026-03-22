@@ -2,26 +2,26 @@
 
 #include <iostream>
 
-#ifdef PIKA_ENABLE_PYTHON
+#ifdef KYLIE_ENABLE_PYTHON
 #include <Python.h>
 #endif
 
-namespace pika::scripting {
+namespace kylie::scripting {
 
 bool PythonBridge::initialize() {
-#ifdef PIKA_ENABLE_PYTHON
+#ifdef KYLIE_ENABLE_PYTHON
     if (!Py_IsInitialized()) {
         Py_Initialize();
     }
     return Py_IsInitialized();
 #else
-    std::cerr << "[PythonBridge] PIKA_ENABLE_PYTHON is OFF; initialization skipped\n";
+    std::cerr << "[PythonBridge] KYLIE_ENABLE_PYTHON is OFF; initialization skipped\n";
     return false;
 #endif
 }
 
 void PythonBridge::shutdown() {
-#ifdef PIKA_ENABLE_PYTHON
+#ifdef KYLIE_ENABLE_PYTHON
     if (Py_IsInitialized()) {
         Py_Finalize();
     }
@@ -33,7 +33,7 @@ bool PythonBridge::callEntityUpdate(const std::string& module,
                                     ecs::Entity entity,
                                     ecs::Registry& registry,
                                     float deltaSeconds) {
-#ifdef PIKA_ENABLE_PYTHON
+#ifdef KYLIE_ENABLE_PYTHON
     if (!Py_IsInitialized()) {
         std::cerr << "[PythonBridge] Python not initialized\n";
         return false;
@@ -73,9 +73,9 @@ bool PythonBridge::callEntityUpdate(const std::string& module,
     (void)entity;
     (void)registry;
     (void)deltaSeconds;
-    std::cerr << "[PythonBridge] PIKA_ENABLE_PYTHON is OFF; call skipped\n";
+    std::cerr << "[PythonBridge] KYLIE_ENABLE_PYTHON is OFF; call skipped\n";
     return false;
 #endif
 }
 
-}  // namespace pika::scripting
+}  // namespace kylie::scripting

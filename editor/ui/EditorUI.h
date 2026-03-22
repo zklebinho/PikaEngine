@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 class EditorUI {
 public:
@@ -37,6 +37,7 @@ private:
 
     void buildMenuBar();
     void buildDockspace();
+    void drawToolbar();
 };
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

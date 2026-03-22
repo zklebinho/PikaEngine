@@ -1,8 +1,8 @@
-#include "pika/Module.hpp"
+#include "kylie/Module.hpp"
 
 #include <iostream>
 
-namespace pika::modules {
+namespace kylie::modules {
 
 bool ModuleRegistry::registerModule(const std::shared_ptr<IModule>& module) {
     if (!module) {
@@ -42,4 +42,4 @@ void ModuleRegistry::updateAll(float deltaTime) {
     }
 }
 
-}  // namespace pika::modules
+}  // namespace kylie::modules

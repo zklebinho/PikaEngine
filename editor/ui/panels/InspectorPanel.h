@@ -2,11 +2,11 @@
 
 #include <string>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 class InspectorPanel {
 public:
     void draw(const std::string& selectedName);
 };
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

@@ -7,7 +7,7 @@
 struct ImVec4;
 struct GLFWwindow;
 
-namespace pika::renderer {
+namespace kylie::renderer {
 
 namespace win {
 class Window;
@@ -40,4 +40,4 @@ private:
     void renderFrame();
 };
 
-}  // namespace pika::renderer
+}  // namespace kylie::renderer

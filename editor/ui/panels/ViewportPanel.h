@@ -1,10 +1,10 @@
 #pragma once
 
-namespace pika::editor {
+namespace kylie::editor {
 
 class ViewportPanel {
 public:
     void draw();
 };
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

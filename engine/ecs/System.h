@@ -1,7 +1,7 @@
 // System interface for ECS
 #pragma once
 
-namespace pika::ecs {
+namespace kylie::ecs {
 
 class Registry;
 
@@ -11,4 +11,4 @@ public:
     virtual void update(Registry& registry, float deltaSeconds) = 0;
 };
 
-}  // namespace pika::ecs
+}  // namespace kylie::ecs

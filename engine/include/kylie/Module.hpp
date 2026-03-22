@@ -1,4 +1,4 @@
-// PikaEngine - Module interface and registry
+// KylieEngine - Module interface and registry
 #pragma once
 
 #include <functional>
@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace pika::modules {
+namespace kylie::modules {
 
 class ModuleRegistry;
 
@@ -34,4 +34,4 @@ private:
     std::unordered_map<std::string, std::shared_ptr<IModule>> modules_;
 };
 
-}  // namespace pika::modules
+}  // namespace kylie::modules

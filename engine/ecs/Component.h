@@ -1,8 +1,8 @@
 // Component marker utilities
 #pragma once
 
-namespace pika::ecs {
+namespace kylie::ecs {
 
 struct ComponentTag {};
 
-}  // namespace pika::ecs
+}  // namespace kylie::ecs

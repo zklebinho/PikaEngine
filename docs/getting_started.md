@@ -3,7 +3,7 @@
 ## Prerequisites
 - CMake = 3.20, Ninja recommended
 - C++20 toolchain (MSVC, GCC, or Clang)
-- Optional: Python dev headers (`PIKA_ENABLE_PYTHON`), Emscripten SDK for wasm
+- Optional: Python dev headers (`KYLIE_ENABLE_PYTHON`), Emscripten SDK for wasm
 
 ## Configure & Build (desktop)
 ```bash
@@ -12,20 +12,20 @@ cmake --build --preset windows
 ```
 Manual example:
 ```bash
-cmake -S . -B build -DPIKA_ENABLE_RENDERER=ON -DPIKA_ENABLE_PYTHON=OFF
+cmake -S . -B build -DKYLIE_ENABLE_RENDERER=ON -DKYLIE_ENABLE_PYTHON=OFF
 cmake --build build
 ```
 
 ## Run samples
-- Minimal: `build/examples/minimal/pika_example_minimal`
-- 2D platformer: `build/examples/platformer2d/pika_example_platformer2d`
-- FPS: `build/examples/fps/pika_example_fps`
-- Empty: `build/examples/empty/pika_example_empty`
-- Editor (ImGui): `build/editor/pikaeditor`
+- Minimal: `build/examples/minimal/KYLIE_example_minimal`
+- 2D platformer: `build/examples/platformer2d/KYLIE_example_platformer2d`
+- FPS: `build/examples/fps/KYLIE_example_fps`
+- Empty: `build/examples/empty/KYLIE_example_empty`
+- Editor (ImGui): `build/editor/kylieeditor`
 
 ## Enable Python scripting
 ```bash
-cmake -S . -B build -DPIKA_ENABLE_PYTHON=ON
+cmake -S . -B build -DKYLIE_ENABLE_PYTHON=ON
 cmake --build build
 ```
 Ensure Python dev headers/libs are discoverable.
@@ -38,6 +38,6 @@ cmake --build --preset wasm
 Renderer/editor/plugins/examples disabled by default for wasm; enable progressively once WebGL bindings are ready.
 
 ## Common Options
-- `PIKA_ENABLE_RENDERER` ON/OFF
+- `KYLIE_ENABLE_RENDERER` ON/OFF
 - `BUILD_EDITOR`, `BUILD_EXAMPLES`, `BUILD_PLUGINS`
-- `PIKA_ENABLE_LUA`, `PIKA_ENABLE_PYTHON`
+- `KYLIE_ENABLE_LUA`, `KYLIE_ENABLE_PYTHON`

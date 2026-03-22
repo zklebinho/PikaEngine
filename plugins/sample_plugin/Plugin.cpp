@@ -1,14 +1,14 @@
-#include "pika/Module.hpp"
+#include "kylie/Module.hpp"
 
 #include <iostream>
 #include <memory>
 
-namespace pika::plugins {
+namespace kylie::plugins {
 
 #if defined(_WIN32)
-#define PIKA_PLUGIN_EXPORT __declspec(dllexport)
+#define KYLIE_PLUGIN_EXPORT __declspec(dllexport)
 #else
-#define PIKA_PLUGIN_EXPORT
+#define KYLIE_PLUGIN_EXPORT
 #endif
 
 class SamplePlugin : public modules::IModule {
@@ -27,13 +27,13 @@ public:
     void onShutdown() override { std::cout << "[SamplePlugin] Shutdown\n"; }
 };
 
-PIKA_PLUGIN_EXPORT std::shared_ptr<modules::IModule> createSamplePlugin() {
+KYLIE_PLUGIN_EXPORT std::shared_ptr<modules::IModule> createSamplePlugin() {
     return std::make_shared<SamplePlugin>();
 }
 
 // Generic factory name so PluginManager can find it by default.
-PIKA_PLUGIN_EXPORT std::shared_ptr<modules::IModule> createPlugin() {
+KYLIE_PLUGIN_EXPORT std::shared_ptr<modules::IModule> createPlugin() {
     return createSamplePlugin();
 }
 
-}  // namespace pika::plugins
+}  // namespace kylie::plugins

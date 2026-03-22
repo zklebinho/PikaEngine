@@ -6,9 +6,9 @@
 
 #include "window/Window.h"
 
-namespace pika::renderer {
+namespace kylie::renderer {
 
-namespace win = pika::window;
+namespace win = kylie::window;
 
 Renderer::Renderer(int width, int height, const std::string& title)
     : width_(width), height_(height), title_(title) {}
@@ -89,4 +89,4 @@ void Renderer::setSwapInterval(int interval) {
     }
 }
 
-}  // namespace pika::renderer
+}  // namespace kylie::renderer

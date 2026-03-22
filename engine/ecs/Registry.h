@@ -10,7 +10,7 @@
 #include <vector>
 #include <utility>
 
-namespace pika::ecs {
+namespace kylie::ecs {
 
 class Registry {
 public:
@@ -144,4 +144,4 @@ private:
     std::unordered_map<std::type_index, std::unique_ptr<PoolBase>> pools_;
 };
 
-}  // namespace pika::ecs
+}  // namespace kylie::ecs

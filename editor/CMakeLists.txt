@@ -9,35 +9,35 @@ set(EDITOR_SRC
     ui/panels/ViewportPanel.cpp
 )
 
-add_library(pikaeditor_lib ${EDITOR_SRC})
+add_library(kylieeditor_lib ${EDITOR_SRC})
 
-target_include_directories(pikaeditor_lib
+target_include_directories(kylieeditor_lib
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/ui
         ${CMAKE_CURRENT_SOURCE_DIR}/ui/panels
 )
 
-target_link_libraries(pikaeditor_lib PUBLIC pikaengine)
+target_link_libraries(kylieeditor_lib PUBLIC KylieEngine)
 if(TARGET imgui)
-    target_link_libraries(pikaeditor_lib PUBLIC imgui)
+    target_link_libraries(kylieeditor_lib PUBLIC imgui)
 endif()
 if(TARGET glfw)
-    target_link_libraries(pikaeditor_lib PUBLIC glfw)
+    target_link_libraries(kylieeditor_lib PUBLIC glfw)
 endif()
 if(TARGET glad)
-    target_link_libraries(pikaeditor_lib PUBLIC glad)
+    target_link_libraries(kylieeditor_lib PUBLIC glad)
 endif()
 
-target_compile_features(pikaeditor_lib PUBLIC cxx_std_20)
+target_compile_features(kylieeditor_lib PUBLIC cxx_std_20)
 
-if(PIKA_STRICT_WARNINGS)
+if(KYLIE_STRICT_WARNINGS)
     if(MSVC)
-        target_compile_options(pikaeditor_lib PRIVATE /W4 /permissive-)
+        target_compile_options(kylieeditor_lib PRIVATE /W4 /permissive-)
     else()
-        target_compile_options(pikaeditor_lib PRIVATE -Wall -Wextra -Wpedantic -Werror)
+        target_compile_options(kylieeditor_lib PRIVATE -Wall -Wextra -Wpedantic -Werror)
     endif()
 endif()
 
-add_executable(pikaeditor src/main.cpp)
-target_link_libraries(pikaeditor PRIVATE pikaeditor_lib)
+add_executable(kylieeditor src/main.cpp)
+target_link_libraries(kylieeditor PRIVATE kylieeditor_lib)

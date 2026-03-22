@@ -1,4 +1,4 @@
-scene: Test Scene
+scene: Kylie Test Scene
 entities:
   - Player
   - Camera

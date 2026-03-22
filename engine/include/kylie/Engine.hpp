@@ -1,4 +1,4 @@
-// PikaEngine - Core engine loop
+// KylieEngine - Core engine loop
 #pragma once
 
 #include "Module.hpp"
@@ -7,7 +7,7 @@
 #include <functional>
 #include <string>
 
-namespace pika {
+namespace kylie {
 
 class Engine {
 public:
@@ -28,4 +28,4 @@ private:
     TickCallback tickCallback_;
 };
 
-}  // namespace pika
+}  // namespace kylie

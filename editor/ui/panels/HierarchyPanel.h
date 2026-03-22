@@ -3,11 +3,11 @@
 #include <string>
 #include <vector>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 class HierarchyPanel {
 public:
     int draw(const std::vector<std::string>& entities, int selectedIndex);
 };
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

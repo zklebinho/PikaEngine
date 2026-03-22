@@ -1,11 +1,11 @@
-// Lightweight Python bridge (stubbed when PIKA_ENABLE_PYTHON is OFF)
+// Lightweight Python bridge (stubbed when KYLIE_ENABLE_PYTHON is OFF)
 #pragma once
 
 #include "ecs/Registry.h"
 
 #include <string>
 
-namespace pika::scripting {
+namespace kylie::scripting {
 
 class PythonBridge {
 public:
@@ -18,4 +18,4 @@ public:
                           float deltaSeconds);
 };
 
-}  // namespace pika::scripting
+}  // namespace kylie::scripting

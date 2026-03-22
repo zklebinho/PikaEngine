@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace pika::sandbox {
+namespace kylie::sandbox {
 
 class SandboxScene {
 public:
@@ -19,4 +19,4 @@ private:
     std::vector<std::string> entities_;
 };
 
-}  // namespace pika::sandbox
+}  // namespace kylie::sandbox

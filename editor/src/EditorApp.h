@@ -1,6 +1,6 @@
 #pragma once
 
-namespace pika::editor {
+namespace kylie::editor {
 
 int RunEditor();
 

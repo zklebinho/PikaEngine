@@ -1,7 +1,7 @@
 #include "ConsolePanel.h"
 #include "imgui.h"
 
-namespace pika::editor {
+namespace kylie::editor {
 
 void ConsolePanel::draw(const std::vector<std::string>& lines) {
     ImGui::Begin("Console");
@@ -11,4 +11,4 @@ void ConsolePanel::draw(const std::vector<std::string>& lines) {
     ImGui::End();
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

@@ -11,7 +11,7 @@
     #include <dlfcn.h>
 #endif
 
-namespace pika::plugins {
+namespace kylie::plugins {
 
 namespace {
 
@@ -84,4 +84,4 @@ std::vector<std::shared_ptr<modules::IModule>> PluginManager::modules() const {
         return result;
     }
 
-}  // namespace pika::plugins
+}  // namespace kylie::plugins

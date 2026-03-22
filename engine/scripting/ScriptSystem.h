@@ -6,7 +6,7 @@
 #include <functional>
 #include <string>
 
-namespace pika::scripting {
+namespace kylie::scripting {
 
 class PythonBridge;
 
@@ -38,4 +38,4 @@ private:
     PythonBridge* pythonBridge_{nullptr};  // non-owning
 };
 
-}  // namespace pika::scripting
+}  // namespace kylie::scripting

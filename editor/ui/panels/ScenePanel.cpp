@@ -1,10 +1,10 @@
 #include "ScenePanel.h"
 #include "imgui.h"
 
-namespace pika::editor {
+namespace kylie::editor {
 
 void ScenePanel::draw(const std::string& sceneName, const std::vector<std::string>& entities) {
-    ImGui::Begin("Scene Panel");
+    ImGui::Begin("Scene View");
     ImGui::Text("Scene: %s", sceneName.c_str());
     ImGui::Separator();
     ImGui::Text("Entities: %d", static_cast<int>(entities.size()));
@@ -14,4 +14,4 @@ void ScenePanel::draw(const std::string& sceneName, const std::vector<std::strin
     ImGui::End();
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

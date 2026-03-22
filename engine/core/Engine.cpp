@@ -4,7 +4,7 @@
 #include <iostream>
 #include <thread>
 
-namespace pika::core {
+namespace kylie::core {
 
 Engine::Engine() = default;
 
@@ -51,4 +51,4 @@ void Engine::dispatchEvents() {
     }
 }
 
-}  // namespace pika::core
+}  // namespace kylie::core

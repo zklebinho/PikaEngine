@@ -1,8 +1,8 @@
-#include "pika/NodeGraph.hpp"
+#include "kylie/NodeGraph.hpp"
 
 #include <sstream>
 
-namespace pika::graph {
+namespace kylie::graph {
 
 NodeId NodeGraph::addNode(const std::string& name) {
     Node node;
@@ -68,4 +68,4 @@ std::string NodeGraph::toJsonLike() const {
     return out.str();
 }
 
-}  // namespace pika::graph
+}  // namespace kylie::graph

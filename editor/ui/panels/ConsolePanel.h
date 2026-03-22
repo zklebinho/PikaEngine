@@ -3,11 +3,11 @@
 #include <string>
 #include <vector>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 class ConsolePanel {
 public:
     void draw(const std::vector<std::string>& lines);
 };
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

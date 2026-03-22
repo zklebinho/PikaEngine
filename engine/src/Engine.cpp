@@ -1,9 +1,9 @@
-#include "pika/Engine.hpp"
+#include "kylie/Engine.hpp"
 
 #include <iostream>
 #include <thread>
 
-namespace pika {
+namespace kylie {
 
 Engine::Engine() = default;
 Engine::~Engine() {
@@ -30,4 +30,4 @@ void Engine::runFrames(int frameCount, float fixedDeltaSeconds) {
     }
 }
 
-}  // namespace pika
+}  // namespace kylie

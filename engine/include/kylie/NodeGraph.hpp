@@ -1,4 +1,4 @@
-// PikaEngine - Minimal node graph model for visual blocks
+// KylieEngine - Minimal node graph model for visual blocks
 #pragma once
 
 #include <optional>
@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace pika::graph {
+namespace kylie::graph {
 
 using NodeId = int;
 using PinId = int;
@@ -51,4 +51,4 @@ private:
     std::vector<Connection> edges_;
 };
 
-}  // namespace pika::graph
+}  // namespace kylie::graph

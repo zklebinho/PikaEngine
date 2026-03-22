@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 class AssetsPanel {
 public:
@@ -12,4 +12,4 @@ public:
               const std::vector<std::string>& knownAssets);
 };
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

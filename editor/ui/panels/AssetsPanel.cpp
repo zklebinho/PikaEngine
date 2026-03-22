@@ -3,11 +3,11 @@
 
 #include <filesystem>
 
-namespace pika::editor {
+namespace kylie::editor {
 
 void AssetsPanel::draw(const std::filesystem::path& assetsRoot,
                        const std::vector<std::string>& knownAssets) {
-    ImGui::Begin("Assets");
+    ImGui::Begin("Assets Browser");
     ImGui::Text("Root: %s", assetsRoot.string().c_str());
     ImGui::Separator();
     for (const auto& asset : knownAssets) {
@@ -16,4 +16,4 @@ void AssetsPanel::draw(const std::filesystem::path& assetsRoot,
     ImGui::End();
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

@@ -12,8 +12,8 @@
       "binaryDir": "${sourceDir}/build/windows",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "PIKA_ENABLE_LUA": "OFF",
-        "PIKA_ENABLE_PYTHON": "OFF"
+        "KYLIE_ENABLE_LUA": "OFF",
+        "KYLIE_ENABLE_PYTHON": "OFF"
       },
       "condition": {
         "type": "equals",
@@ -27,8 +27,8 @@
       "binaryDir": "${sourceDir}/build/linux",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "PIKA_ENABLE_LUA": "OFF",
-        "PIKA_ENABLE_PYTHON": "OFF"
+        "KYLIE_ENABLE_LUA": "OFF",
+        "KYLIE_ENABLE_PYTHON": "OFF"
       },
       "condition": {
         "type": "equals",
@@ -43,12 +43,12 @@
       "toolchainFile": "${sourceDir}/cmake/toolchains/emscripten.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "PIKA_ENABLE_RENDERER": "OFF",
+        "KYLIE_ENABLE_RENDERER": "OFF",
         "BUILD_EDITOR": "OFF",
         "BUILD_EXAMPLES": "OFF",
         "BUILD_PLUGINS": "OFF",
-        "PIKA_ENABLE_LUA": "OFF",
-        "PIKA_ENABLE_PYTHON": "OFF"
+        "KYLIE_ENABLE_LUA": "OFF",
+        "KYLIE_ENABLE_PYTHON": "OFF"
       }
     }
   ],

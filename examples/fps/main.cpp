@@ -1,4 +1,4 @@
-#include "pika/Engine.hpp"
+#include "kylie/Engine.hpp"
 #include "ecs/Registry.h"
 
 #include <iostream>
@@ -12,14 +12,14 @@ struct Camera {
 };
 
 int main() {
-    std::cout << "PikaEngine FPS Starter\n";
+    std::cout << "KylieEngine FPS Starter\n";
 
-    pika::ecs::Registry registry;
+    kylie::ecs::Registry registry;
     auto player = registry.create();
     registry.emplace<Transform>(player, Transform{0, 1.6f, 0});
     registry.emplace<Camera>(player, Camera{0, 0});
 
-    pika::Engine engine;
+    kylie::Engine engine;
     engine.setTickCallback([&](float dt) {
         // Placeholder input: move forward and yaw slightly each frame
         auto& t = registry.get<Transform>(player);

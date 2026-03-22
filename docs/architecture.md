@@ -10,7 +10,7 @@
 - Registry tracks modules by string key; supports manual registration now; dynamic loading is stubbed.
 
 ## Scripting
-- `ScriptingEngine` placeholder; when `PIKA_ENABLE_LUA` is ON it toggles a compile-time path to integrate a Lua VM later.
+- `ScriptingEngine` placeholder; when `KYLIE_ENABLE_LUA` is ON it toggles a compile-time path to integrate a Lua VM later.
 - API: `runScript(std::string_view code)` and `runFile(const std::filesystem::path&)` returning success/failure.
 
 ## Visual blocks
@@ -18,7 +18,7 @@
 - Minimal serialization stub to JSON-like text for debugging; swap to real JSON later.
 
 ## Editor
-- CLI stub links `pikaengine`, prints registered modules; ready to be swapped with GUI.
+- CLI stub links `KylieEngine`, prints registered modules; ready to be swapped with GUI.
 
 ## Plugins
 - `sample_plugin` implements `IModule` and registers itself with the registry; built as shared lib when `BUILD_PLUGINS` is ON.

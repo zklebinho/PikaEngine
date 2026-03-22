@@ -8,11 +8,12 @@
 
 #include <chrono>
 #include <iostream>
+#include <filesystem>
 
-namespace pika::core {
+namespace kylie::core {
 
 EngineApp::EngineApp()
-    : renderer_(1280, 720, "Pika Engine Editor") {
+    : renderer_(1280, 720, "Kylie Engine Editor") {
 }
 
 EngineApp::~EngineApp() {
@@ -60,12 +61,27 @@ bool EngineApp::init(const EngineConfig& config) {
     // AI placeholder
     aiStub_.initialize();
 
+    // Dimension defaults
+    auto dimConfig = defaultDimension_.configure();
+    std::cout << "[Dimension] Camera: " << dimConfig.camera << " | Physics: " << dimConfig.physics
+              << " | Rendering: " << dimConfig.rendering << "\n";
+
+    // Auto-load sandbox project/scene
+    const std::filesystem::path sandboxScenePath{"assets/scenes/test.scene"};
+    if (!sceneManager_.loadScene("Sandbox", sandboxScenePath)) {
+        auto scene = sceneManager_.createScene("Sandbox");
+        scene->createEntity("Player");
+        scene->createEntity("Camera");
+        scene->createEntity("Light");
+        sceneManager_.saveScene("Sandbox", sandboxScenePath);
+    }
+
     // Optional plugin loading
     if (config.enablePlugins) {
         loadPlugins();
     }
 
-    std::cout << "Pika Engine started successfully\n";
+    std::cout << "Kylie Engine started successfully\n";
     return true;
 }
 
@@ -153,4 +169,4 @@ void EngineApp::loadPlugins() {
     }
 }
 
-}  // namespace pika::core
+}  // namespace kylie::core

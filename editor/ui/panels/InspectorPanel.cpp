@@ -1,7 +1,7 @@
 #include "InspectorPanel.h"
 #include "imgui.h"
 
-namespace pika::editor {
+namespace kylie::editor {
 
 void InspectorPanel::draw(const std::string& selectedName) {
     ImGui::Begin("Inspector");
@@ -23,4 +23,4 @@ void InspectorPanel::draw(const std::string& selectedName) {
     ImGui::End();
 }
 
-}  // namespace pika::editor
+}  // namespace kylie::editor

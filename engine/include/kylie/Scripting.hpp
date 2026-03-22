@@ -1,11 +1,11 @@
-// PikaEngine - Scripting hook (Lua-ready stub)
+// KylieEngine - Scripting hook (Lua-ready stub)
 #pragma once
 
 #include <filesystem>
 #include <string>
 #include <string_view>
 
-namespace pika::scripting {
+namespace kylie::scripting {
 
 class ScriptingEngine {
 public:
@@ -16,4 +16,4 @@ private:
     bool run(std::string_view label, std::string_view code);
 };
 
-}  // namespace pika::scripting
+}  // namespace kylie::scripting

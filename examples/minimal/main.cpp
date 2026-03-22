@@ -1,23 +1,23 @@
-#include "pika/Engine.hpp"
-#include "pika/Module.hpp"
-#include "pika/NodeGraph.hpp"
-#include "pika/Scripting.hpp"
+#include "kylie/Engine.hpp"
+#include "kylie/Module.hpp"
+#include "kylie/NodeGraph.hpp"
+#include "kylie/Scripting.hpp"
 
 #include <iostream>
 #include <memory>
 
 int main() {
-    std::cout << "PikaEngine minimal example\n";
-    pika::Engine engine;
+    std::cout << "KylieEngine minimal example\n";
+    kylie::Engine engine;
 
 #ifdef WITH_SAMPLE_PLUGIN
     // Forward declaration from sample_plugin to avoid an extra header.
-    namespace pika::plugins {
-    std::shared_ptr<pika::modules::IModule> createSamplePlugin();
+    namespace kylie::plugins {
+    std::shared_ptr<kylie::modules::IModule> createSamplePlugin();
     }
 
     // Register sample plugin if available.
-    if (auto plugin = pika::plugins::createSamplePlugin()) {
+    if (auto plugin = kylie::plugins::createSamplePlugin()) {
         engine.modules().registerModule(plugin);
     }
 #else
@@ -30,7 +30,7 @@ int main() {
     });
 
     // Visual node graph demo.
-    pika::graph::NodeGraph graph;
+    kylie::graph::NodeGraph graph;
     auto nodeA = graph.addNode("Input");
     auto nodeB = graph.addNode("Output");
     graph.addOutputPin(nodeA, "value");
@@ -39,7 +39,7 @@ int main() {
     std::cout << "[Graph] " << graph.toJsonLike() << "\n";
 
     // Scripting demo (stubbed).
-    pika::scripting::ScriptingEngine scripting;
+    kylie::scripting::ScriptingEngine scripting;
     scripting.runScript("print('hello from lua')");
 
     // Run a few frames.
