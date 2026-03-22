@@ -1,5 +1,6 @@
 set(KYLIE_ENGINE_SRC
     core/EngineApp.cpp
+    src/Engine.cpp
     src/Module.cpp
     src/Scripting.cpp
     src/NodeGraph.cpp

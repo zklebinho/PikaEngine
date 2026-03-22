@@ -1,14 +1,12 @@
 #include "Renderer.h"
 
-#include <glad/gl.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
 #include "window/Window.h"
 
 namespace kylie::renderer {
-
-namespace win = kylie::window;
 
 Renderer::Renderer(int width, int height, const std::string& title)
     : width_(width), height_(height), title_(title) {}
@@ -17,7 +15,7 @@ Renderer::~Renderer() {
 }
 
 bool Renderer::init() {
-    window_ = std::make_unique<win::Window>(width_, height_, title_);
+    window_ = std::make_unique<kylie::window::Window>(width_, height_, title_);
     if (!window_->init()) {
         return false;
     }

@@ -1,6 +1,6 @@
 #include "EngineApp.h"
 
-#include <glad/gl.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -12,9 +12,7 @@
 
 namespace kylie::core {
 
-EngineApp::EngineApp()
-    : renderer_(1280, 720, "Kylie Engine Editor") {
-}
+EngineApp::EngineApp() = default;
 
 EngineApp::~EngineApp() {
     shutdown();
@@ -22,13 +20,13 @@ EngineApp::~EngineApp() {
 
 bool EngineApp::init(const EngineConfig& config) {
     config_ = config;
-    renderer_ = renderer::Renderer(config.width, config.height, config.title);
+    renderer_ = std::make_unique<renderer::Renderer>(config.width, config.height, config.title);
 
-    if (!renderer_.init()) {
+    if (!renderer_->init()) {
         std::cerr << "[EngineApp] Renderer initialization failed\n";
         return false;
     }
-    renderer_.setSwapInterval(1);
+    renderer_->setSwapInterval(1);
 
     // ImGui setup
     IMGUI_CHECKVERSION();
@@ -44,7 +42,7 @@ bool EngineApp::init(const EngineConfig& config) {
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
 
-    if (!ImGui_ImplGlfw_InitForOpenGL(renderer_.rawWindow(), true)) {
+    if (!ImGui_ImplGlfw_InitForOpenGL(renderer_->rawWindow(), true)) {
         std::cerr << "[EngineApp] ImGui GLFW init failed\n";
         return false;
     }
@@ -90,7 +88,7 @@ void EngineApp::run(const std::function<void(float)>& onUpdate,
     using clock = std::chrono::steady_clock;
     auto last = clock::now();
 
-    while (!renderer_.shouldClose()) {
+    while (!renderer_->shouldClose()) {
         auto now = clock::now();
         float dt = std::chrono::duration<float>(now - last).count();
         last = now;
@@ -111,7 +109,7 @@ void EngineApp::run(const std::function<void(float)>& onUpdate,
 }
 
 void EngineApp::beginFrame() {
-    renderer_.poll();
+    renderer_->poll();
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -121,13 +119,13 @@ void EngineApp::endFrame() {
     ImGuiIO& io = ImGui::GetIO();
     ImGui::Render();
 
-    renderer_.setClearColor(0.12f, 0.12f, 0.14f, 1.0f);
+    renderer_->setClearColor(0.12f, 0.12f, 0.14f, 1.0f);
     // Clear and render background via renderer
     // NOTE: renderer renderFrame is called inside swap? We'll call directly.
     // Actually renderer_.renderFrame is private; we perform clear here.
-    int fbw = renderer_.width();
-    int fbh = renderer_.height();
-    if (auto* window = renderer_.rawWindow()) {
+    int fbw = renderer_->width();
+    int fbh = renderer_->height();
+    if (auto* window = renderer_->rawWindow()) {
         glfwGetFramebufferSize(window, &fbw, &fbh);
     }
     glViewport(0, 0, fbw, fbh);
@@ -143,7 +141,7 @@ void EngineApp::endFrame() {
         glfwMakeContextCurrent(backup);
     }
 
-    renderer_.swap();
+    renderer_->swap();
 }
 
 void EngineApp::shutdown() {

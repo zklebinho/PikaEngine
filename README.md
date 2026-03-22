@@ -16,13 +16,16 @@ Modular C++20 game engine + visual editor (GLFW + OpenGL + Dear ImGui) renamed f
 ```bash
 cmake -S . -B build
 cmake --build build --target kylieeditor kylie_sandbox kylie_launcher
+# In-tree quick build is also supported
+cmake .
+cmake --build .
 ```
 
 Run targets (from repo root or `build/` depending on your generator):
 ```bash
-./build/kylieeditor       # editor UI
-./build/kylie_sandbox     # sandbox scene viewer
-./build/kylie_launcher    # launcher (defaults to editor, use --sandbox for sandbox)
+./build/bin/KylieEngineEditor.exe  # editor UI
+./build/bin/kylie_sandbox.exe      # sandbox scene viewer
+./build/bin/kylie_launcher.exe     # launcher (defaults to editor, use --sandbox for sandbox)
 ```
 
 Options (see `cmake/KylieOptions.cmake`):

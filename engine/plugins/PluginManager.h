@@ -20,7 +20,12 @@ public:
     std::vector<std::shared_ptr<modules::IModule>> modules() const;
 
 private:
-    struct PluginHandle;
+    struct PluginHandle {
+        std::filesystem::path path;
+        std::shared_ptr<modules::IModule> module;
+        // Platform handle to shared library
+        void* handle{nullptr};
+    };
     std::vector<PluginHandle> plugins_;
 };
 

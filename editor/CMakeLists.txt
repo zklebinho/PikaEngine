@@ -41,3 +41,4 @@ endif()
 
 add_executable(kylieeditor src/main.cpp)
 target_link_libraries(kylieeditor PRIVATE kylieeditor_lib)
+set_target_properties(kylieeditor PROPERTIES OUTPUT_NAME KylieEngineEditor)

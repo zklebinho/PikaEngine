@@ -12,6 +12,8 @@ void ScriptSystem::attachCppScript(ecs::Registry& registry,
     registry.emplace<ScriptComponent>(entity, ScriptComponent{
                                                      .language = ScriptLanguage::Cpp,
                                                      .cppUpdate = std::move(onUpdate),
+                                                     .pythonModule = {},
+                                                     .pythonFunction = {},
                                                  });
 }
 
@@ -21,6 +23,7 @@ void ScriptSystem::attachPythonScript(ecs::Registry& registry,
                                       std::string function) {
     registry.emplace<ScriptComponent>(entity, ScriptComponent{
                                                      .language = ScriptLanguage::Python,
+                                                     .cppUpdate = {},
                                                      .pythonModule = std::move(module),
                                                      .pythonFunction = std::move(function),
                                                  });

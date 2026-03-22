@@ -1,6 +1,8 @@
 // Basic OpenGL renderer wrapper using GLFW
 #pragma once
 
+#include "window/Window.h"
+
 #include <string>
 #include <memory>
 
@@ -9,14 +11,14 @@ struct GLFWwindow;
 
 namespace kylie::renderer {
 
-namespace win {
-class Window;
-}
-
 class Renderer {
 public:
     Renderer(int width, int height, const std::string& title);
     ~Renderer();
+    Renderer(const Renderer&) = delete;
+    Renderer& operator=(const Renderer&) = delete;
+    Renderer(Renderer&&) noexcept = default;
+    Renderer& operator=(Renderer&&) noexcept = default;
 
     bool init();
     void setClearColor(float r, float g, float b, float a = 1.0f);
@@ -34,7 +36,7 @@ private:
     int width_;
     int height_;
     std::string title_;
-    std::unique_ptr<win::Window> window_;
+    std::unique_ptr<kylie::window::Window> window_;
     float clearColor_[4]{0.39f, 0.58f, 0.93f, 1.0f};
 
     void renderFrame();

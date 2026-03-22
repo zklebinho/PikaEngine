@@ -49,6 +49,7 @@ build*/
 out/
 dist/
 .cache/
+_deps/
 # Generated
 Testing/
 *.cmake

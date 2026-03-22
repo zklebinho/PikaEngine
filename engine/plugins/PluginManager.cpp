@@ -16,24 +16,16 @@ namespace kylie::plugins {
 namespace {
 
 #if defined(_WIN32)
-using LibHandle = HMODULE;
-inline LibHandle loadLibrary(const std::filesystem::path& p) { return LoadLibraryW(p.wstring().c_str()); }
-inline void closeLibrary(LibHandle h) { if (h) FreeLibrary(h); }
-inline void* loadSymbol(LibHandle h, const char* name) { return reinterpret_cast<void*>(GetProcAddress(h, name)); }
+inline void* loadLibrary(const std::filesystem::path& p) { return reinterpret_cast<void*>(LoadLibraryW(p.wstring().c_str())); }
+inline void closeLibrary(void* h) { if (h) FreeLibrary(reinterpret_cast<HMODULE>(h)); }
+inline void* loadSymbol(void* h, const char* name) { return reinterpret_cast<void*>(GetProcAddress(reinterpret_cast<HMODULE>(h), name)); }
 #else
-using LibHandle = void*;
-inline LibHandle loadLibrary(const std::filesystem::path& p) { return dlopen(p.string().c_str(), RTLD_NOW); }
-inline void closeLibrary(LibHandle h) { if (h) dlclose(h); }
-inline void* loadSymbol(LibHandle h, const char* name) { return dlsym(h, name); }
+inline void* loadLibrary(const std::filesystem::path& p) { return dlopen(p.string().c_str(), RTLD_NOW); }
+inline void closeLibrary(void* h) { if (h) dlclose(h); }
+inline void* loadSymbol(void* h, const char* name) { return dlsym(h, name); }
 #endif
 
 }  // namespace
-
-struct PluginManager::PluginHandle {
-    std::filesystem::path path;
-    std::shared_ptr<modules::IModule> module;
-    LibHandle handle{nullptr};
-};
 
 PluginManager::~PluginManager() { unloadAll(); }
 
@@ -42,7 +34,7 @@ bool PluginManager::load(const std::filesystem::path& path, const char* symbol) 
             std::cerr << "[PluginManager] File not found: " << path << "\n";
             return false;
         }
-        LibHandle lib = loadLibrary(path);
+        void* lib = loadLibrary(path);
         if (!lib) {
             std::cerr << "[PluginManager] Failed to load: " << path << "\n";
             return false;

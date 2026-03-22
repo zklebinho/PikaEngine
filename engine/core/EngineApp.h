@@ -45,11 +45,11 @@ public:
     plugins::PluginManager& pluginManager() { return pluginManager_; }
     scene::SceneManager& scenes() { return sceneManager_; }
 
-    void setClearColor(float r, float g, float b) { renderer_.setClearColor(r, g, b, 1.0f); }
+    void setClearColor(float r, float g, float b) { if (renderer_) renderer_->setClearColor(r, g, b, 1.0f); }
 
 private:
     EngineConfig config_{};
-    renderer::Renderer renderer_;
+    std::unique_ptr<renderer::Renderer> renderer_;
     scripting::ScriptSystem scriptSystem_;
     scripting::PythonBridge pythonBridge_;
     plugins::PluginManager pluginManager_;

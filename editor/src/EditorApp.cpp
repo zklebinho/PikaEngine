@@ -1,7 +1,7 @@
 #include "EditorApp.h"
 
 #include "core/EngineApp.h"
-#include "ui/EditorUI.h"
+#include "EditorUI.h"
 #include "visual_scripting/Graph.h"
 
 #include <filesystem>
@@ -42,8 +42,13 @@ int RunEditor() {
 
     auto onGui = [&](float dt) {
         auto active = engine.scenes().activeScene();
-        static std::vector<std::string> emptyEntities;
-        const auto& ents = active ? active->entities() : emptyEntities;
+        std::vector<std::string> ents;
+        if (active) {
+            ents.reserve(active->entities().size());
+            for (const auto& e : active->entities()) {
+                ents.push_back(e.name());
+            }
+        }
         const std::string sceneName = active ? active->name() : "No Scene";
         ui.draw(sceneName, ents, dt);
     };

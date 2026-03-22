@@ -6,16 +6,18 @@
 #include <iostream>
 #include <memory>
 
+#ifdef WITH_SAMPLE_PLUGIN
+// Forward declaration from sample_plugin to avoid an extra header.
+namespace kylie::plugins {
+std::shared_ptr<kylie::modules::IModule> createSamplePlugin();
+}
+#endif
+
 int main() {
     std::cout << "KylieEngine minimal example\n";
     kylie::Engine engine;
 
 #ifdef WITH_SAMPLE_PLUGIN
-    // Forward declaration from sample_plugin to avoid an extra header.
-    namespace kylie::plugins {
-    std::shared_ptr<kylie::modules::IModule> createSamplePlugin();
-    }
-
     // Register sample plugin if available.
     if (auto plugin = kylie::plugins::createSamplePlugin()) {
         engine.modules().registerModule(plugin);

@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.20)
 project(KylieEngine LANGUAGES CXX)
 
+set(KYLIE_OUTPUT_ROOT "${CMAKE_SOURCE_DIR}/build")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${KYLIE_OUTPUT_ROOT}/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${KYLIE_OUTPUT_ROOT}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${KYLIE_OUTPUT_ROOT}/bin")
+foreach(_cfg Debug Release RelWithDebInfo MinSizeRel)
+    string(TOUPPER "${_cfg}" _ucfg)
+    set("CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${_ucfg}" "${KYLIE_OUTPUT_ROOT}/lib")
+    set("CMAKE_LIBRARY_OUTPUT_DIRECTORY_${_ucfg}" "${KYLIE_OUTPUT_ROOT}/lib")
+    set("CMAKE_RUNTIME_OUTPUT_DIRECTORY_${_ucfg}" "${KYLIE_OUTPUT_ROOT}/bin")
+endforeach()
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(KylieOptions)
 
