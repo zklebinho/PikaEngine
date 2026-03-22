@@ -1,63 +1,43 @@
 # PikaEngine
 
-A tiny, modular C++20 game engine inspired by Godot, Unreal Engine, and Scratch. The goal is to stay **extremely lightweight**, keep the core clear, and let modules, scripting, and visual blocks do the heavy lifting.
+A tiny, modular C++20 game engine + editor prototype inspired by Godot/Unreal. This repo now includes a runnable editor, sandbox scene loader, plugin/AI placeholders, and a GLFW/OpenGL/ImGui rendering stack.
 
-## Features (initial skeleton)
-- C++20 core with a minimal main loop
-- Module registry for engine extensions
-- Optional Lua hook (stubbed) for scripting
-- Visual block graph model (nodes, pins, connections)
-- Sample plugin + minimal example app
-- Editor CLI placeholder ready for a future GUI
+## What's inside
+- `engine/` core runtime (modules, ECS stub, scripting stubs, renderer/window, sandbox scene loader, AI placeholder)
+- `editor/` ImGui editor UI (dockspace + Scene/Hierarchy/Inspector/Assets/Console/Viewport panels)
+- `assets/` starter content (`scenes/test.scene`, models/, textures/, scripts/)
+- `plugins/` sample plugin + plugin manager
+- `launcher/` CLI entry that can start editor (default) or sandbox mode
 
-## Directory layout
-- `engine/` ï¿½ core engine library (`pikaengine`): modules, scripting hook, node graph
-- `editor/` ï¿½ CLI editor stub linking `pikaengine`
-- `plugins/` ï¿½ sample plugin implementing `IModule`
-- `examples/` ï¿½ runnable samples; `minimal/` shows engine + plugin + scripting stub
-- `docs/` ï¿½ architecture, roadmap, contributing notes
-- `cmake/` ï¿½ build options and third-party stubs
-
-## Build (CMake = 3.20)
+## Build (Windows, CMake = 3.20)
 ```bash
-cmake -S . -B build -DPIKA_ENABLE_LUA=OFF
-cmake --build build
+cmake -S . -B build
+cmake --build build --target pikaeditor pika_sandbox pika_launcher
 ```
 
-Enable the Lua hook (stubbed, no external deps yet):
+Run targets (from repo root or `build/` depending on your generator):
 ```bash
-cmake -S . -B build -DPIKA_ENABLE_LUA=ON
-cmake --build build
+./build/pikaeditor        # editor UI with docked panels
+./build/pika_sandbox      # sandbox scene viewer
+./build/pika_launcher     # launcher (defaults to editor, use --sandbox for sandbox)
 ```
 
-Build sample plugin + example:
-```bash
-cmake --build build --target sample_plugin pika_example_minimal
-```
+Options (see `cmake/PikaOptions.cmake`):
+- `PIKA_ENABLE_RENDERER` (ON) — GLFW/GLAD/ImGui renderer
+- `BUILD_EDITOR` (ON), `BUILD_SANDBOX` (ON), `BUILD_LAUNCHER` (ON)
+- `BUILD_PLUGINS`, `BUILD_EXAMPLES`, `PIKA_ENABLE_LUA`, `PIKA_ENABLE_PYTHON`
 
-Run example (path may vary per platform):
-```bash
-./build/examples/minimal/pika_example_minimal
-```
+## Editor UI
+- Dockspace main window with menus: File, Edit, Project, Window, Help
+- Panels: Scene, Hierarchy, Inspector, Assets, Console, Viewport + FPS status line
+- Colored OpenGL background and ImGui rendering
 
-## Roadmap
-- Hook real Lua VM and script bindings
-- GUI editor with node-based visual scripting
-- Hot-reloadable plugin loader per platform
-- Asset pipeline + scene format
-- Automated tests and CI
+## Sandbox
+- Loads `assets/scenes/test.scene` (simple YAML/JSON-like list) and shows entities in an ImGui panel.
+
+## Notes
+- Renderer uses GLFW + GLAD + Dear ImGui (via FetchContent). No external installs required on Windows/MSVC.
+- Console prints `Pika Engine started successfully` on startup.
 
 ## Contributing
-See `docs/contributing.md`. PRs and issues welcome.
-
-## Pika Engine
-
-A lightweight modular game engine designed for speed, flexibility and community driven development.
-
-Features:
-
-- C++ core
-- plugin architecture
-- visual scripting
-- Python scripting
-- extremely lightweight runtime
+See `docs/contributing.md`.

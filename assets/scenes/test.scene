@@ -1,0 +1,5 @@
+scene: Test Scene
+entities:
+  - Player
+  - Camera
+  - Light

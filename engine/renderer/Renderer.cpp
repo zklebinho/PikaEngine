@@ -34,9 +34,14 @@ bool Renderer::init() {
 }
 
 void Renderer::renderFrame() {
-    // Simple clear screen with cornflower blue
-    glViewport(0, 0, width_, height_);
-    glClearColor(0.39f, 0.58f, 0.93f, 1.0f);
+    // Adjust to current framebuffer size (handles resize)
+    int fbw = width_;
+    int fbh = height_;
+    if (window_) {
+        glfwGetFramebufferSize(window_->raw(), &fbw, &fbh);
+    }
+    glViewport(0, 0, fbw, fbh);
+    glClearColor(clearColor_[0], clearColor_[1], clearColor_[2], clearColor_[3]);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -67,6 +72,21 @@ void Renderer::poll() {
 
 void Renderer::swap() {
     if (window_) window_->swap();
+}
+
+GLFWwindow* Renderer::rawWindow() const { return window_ ? window_->raw() : nullptr; }
+
+void Renderer::setClearColor(float r, float g, float b, float a) {
+    clearColor_[0] = r;
+    clearColor_[1] = g;
+    clearColor_[2] = b;
+    clearColor_[3] = a;
+}
+
+void Renderer::setSwapInterval(int interval) {
+    if (window_) {
+        glfwSwapInterval(interval);
+    }
 }
 
 }  // namespace pika::renderer

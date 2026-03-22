@@ -44,6 +44,11 @@ compile_commands.json
 .idea/
 *.code-workspace
 .vs/
+CMakeUserPresets.json
+build*/
+out/
+dist/
+.cache/
 # Generated
 Testing/
 *.cmake
